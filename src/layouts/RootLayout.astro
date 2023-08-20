@@ -1,0 +1,64 @@
+---
+import Meta from "../components/Meta.astro"
+import Navbar from "../components/Navbar.astro"
+import Footer from "../components/Footer.astro"
+
+interface Props {
+    title?: string,
+    openGraph?: {
+        title?: string,
+        description?: string,
+        image?: string,
+        url?: string,
+    }
+}
+
+let { title, openGraph } = Astro.props;
+
+title = title || "Default title";
+openGraph = openGraph || {
+    title: "My Blog",
+    description: "Default description",
+    image: "Default image",
+    url: "Default url",
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<Meta title={title} openGraph={openGraph} />
+	</head>
+	<body>
+        <Navbar />
+
+        <main>
+            <slot />
+        </main>
+
+        <Footer />
+	</body>
+</html>
+
+<style>
+    main {
+        width: 100%;
+        margin: auto;
+        margin-top: 100px;
+        max-width: 930px;
+        box-sizing: border-box;
+    }
+
+    @media screen and (max-width: 950px) {
+        main {
+            max-width: 760px;
+            padding: 0 20px;
+        }
+    }
+
+    @media screen and (max-width: 780px) {
+        main {
+            max-width: 100%;
+        }
+    }
+</style>

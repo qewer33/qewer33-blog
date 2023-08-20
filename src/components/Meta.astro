@@ -1,0 +1,53 @@
+---
+import "../styles/global.css"
+
+interface Props {
+    title: string,
+    openGraph?: {
+        title?: string,
+        description?: string,
+        image?: string,
+        url?: string,
+    }
+}
+
+let { title, openGraph } = Astro.props;
+---
+
+<title>{title}</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{/* Generic Meta tags */}
+<meta name="description" content="Description of my website">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="URL for this page">
+
+{/* Social Media meta tags */}
+{openGraph && <>
+    {openGraph.title && <meta property="og:title" content={openGraph.title}>}
+    {openGraph.description && <meta property="og:description" content={openGraph.description}>}
+    {openGraph?.image && <meta property="og:image" content={openGraph.image}>}
+    {openGraph.url && <meta property="og:url" content={openGraph.url}>}
+    {openGraph.title && <meta property="og:site_name" content={openGraph.title}>}
+</>}
+
+{/* Twitter meta tags */}
+<meta name="twitter:card" content="summary_large_image"> {/* Don't change this one */}
+<meta name="twitter:site" content="Website URL">
+<meta name="twitter:title" content="Title for page">
+<meta name="twitter:creator" content="Your Twitter Handle">
+<meta name="twitter:description" content="Description of page">
+<meta name="twitter:image" content="Image of page">
+
+{/* Apple meta tags */}
+<meta name="format-detection" content="telephone=yes"> {/* auto detect phone numbers on apple devices on this page */}
+<meta name="viewport" content="initial-scale=1, maximum-scale=1" user-scalable="no"> {/* For mobile devices */}
+
+{/* Dark Reader extension */}
+<meta name="darkreader-lock"> {/* Prevents dark reader from modifying your website colors, uncomment */}
+
+{/* Google Fonts - JetBrains Mono */}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">

@@ -1,0 +1,61 @@
+:root {
+    font-family: JetBrains Mono,Inter,Avenir,Helvetica,Arial,sans-serif;
+    font-weight: 600;
+
+    --background-primary: 29, 29, 29;
+    --background-secondary: 49, 49, 49;
+    --accent-primary: 5, 120, 240;
+    --accent-secondary: 0, 96, 199;
+    --text-primary: 255, 255, 255;
+    --text-secondary: 255, 255, 255, 0.514;
+    --accent-pink: 197, 59, 112;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-text-size-adjust: 100%;
+    font-size: 16px;
+    
+    accent-color: rgb(var(--accent-primary));
+    color-scheme: dark;
+
+    color: rgb(var(--text-primary));
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background-color: rgb(var(--background-primary));
+}
+
+::selection, ::-moz-selection {
+    background-color: rgb(var(--accent-secondary));
+    color: rgb(var(--text-primary));
+}
+
+h1, h2, h3, h4, h5, h6, p, a, span, div, ul, li {
+    padding: 0;
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+}
+
+h1.large {
+    font-size: 4rem;
+    color: rgb(var(--accent-primary));
+}
+
+section.section-block {
+    margin-top: 40vh;
+}
+
+section.section-block > * {
+    margin-block-start: 0.25em;
+    margin-block-end: 0.25em;
+}
+
+.skew {
+    transform: skew(-5deg);
+}

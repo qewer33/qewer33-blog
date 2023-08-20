@@ -1,0 +1,150 @@
+---
+import { getCollection } from "astro:content";
+import RootLayout from "../layouts/RootLayout.astro"
+
+const posts = await getCollection("blog");
+---
+
+<RootLayout title="Blogs">
+    <section class="section-block">
+        <h1 class="large">My Blogs</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit adipisci eum quaerat beatae. </p>
+        <div class="container">
+            {posts.map((post) => {
+                const date = post.data.created.toLocaleDateString("en-GB", { year: 'numeric', month: 'numeric', day: 'numeric' });
+                const year = date.split("/")[2];
+                const month = date.split("/")[1];
+                const day = date.split("/")[0];
+
+                return (
+                    <a draggable="false" href={`/${year}/${month}/${day}/${post.slug}`} class="card">
+                        <img draggable="false" src={post.data.thumbnail} alt={"Thumbnail for " + post.data.title} />
+                        <span class="date">{post.data.created.toLocaleDateString("en-GB", { year: 'numeric', month: 'numeric', day: 'numeric' })}</span>    
+                        <div>
+                            <div>
+                                <h3>{post.data.title}</h3>
+                                <p>{post.data.description}</p>    
+                            </div>
+                            <div class="tags">
+                                {post.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+                            </div>
+                        </div>
+                    </a>
+                )
+            })}
+        </div>
+    </section>
+</RootLayout>
+
+<style>
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    grid-template-rows: repeat(auto-fill, 300px);
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+    margin-block: 15px !important;
+    justify-content: center;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(var(--background-secondary));
+    padding: 10px;
+    position: relative;
+    outline: 2px solid rgba(0, 0, 0, 0);
+    transition: outline 0.2s;
+    user-select: none;
+    text-decoration: none;
+    color: rgb(var(--text-primary));
+}
+
+.card:hover {
+    outline: 2px solid rgb(var(--accent-primary));
+    cursor: pointer;
+}
+
+.card img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    outline: 2px solid rgb(var(--background-primary));
+}
+
+.card > div {
+    padding-top: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-grow: 1;
+    position: relative;
+}
+
+.card > div > div:first-child {
+    flex-grow: 1;
+}
+
+.card .tags {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.card .tag {
+    padding: 2px 7px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: rgb(var(--text-secondary));
+    background-color: rgb(var(--background-primary));
+    transition: color 0.2s, background-color 0.2s;
+}
+
+.card:hover .tag {
+    color: rgb(var(--text-primary));
+    background-color: rgb(var(--accent-primary));
+}
+
+
+.card h3 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin: 0;
+    max-height: 52px;
+}
+
+.card p {
+    font-size: 0.75rem;
+    font-weight: 400;
+    margin: 0;
+    flex-grow: 1;
+    max-height: 36px;
+}
+
+.card .date {
+    position: absolute;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: rgb(var(--text-secondary));
+    top: 15px;
+    right: 15px;
+    background-color: rgb(var(--background-secondary));
+    padding: 0 2px;
+}
+
+@media screen and (max-width: 950px) {
+    .container {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+}
+
+</style>

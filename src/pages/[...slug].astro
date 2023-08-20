@@ -1,0 +1,139 @@
+---
+import { getCollection } from "astro:content";
+import RootLayout from "../layouts/RootLayout.astro";
+
+interface Props {
+    post: {
+        data: {
+            title: string;
+            description: string;
+            tags: string[];
+            created: Date;
+            thumbnail: string;
+        }
+        render: () => any;
+    }
+}
+
+export async function getStaticPaths() {
+    const entries = await getCollection("blog");
+    return entries.map((entry) => {
+        const date = entry.data.created.toLocaleDateString("en-GB", { year: 'numeric', month: 'numeric', day: 'numeric' });
+        const year = date.split("/")[2];
+        const month = date.split("/")[1];
+        const day = date.split("/")[0];
+
+        return {
+            params: { 
+                slug: `${year}/${month}/${day}/${entry.slug}`
+            }, 
+            props: { 
+                post: entry 
+            }
+        }
+    });
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const url = Astro.url;
+---
+
+<RootLayout title={post.data.title} openGraph={{
+    title: post.data.title,
+    description: post.data.description,
+    image: post.data.thumbnail,
+    url: url.toString(),
+}}>
+    {post.data.thumbnail && (
+        <img src={post.data.thumbnail} alt="" class="thumbnail-image" />
+    )}
+
+    <div class="container">
+        {post.data.title && (
+            <h1 class="post-title">{post.data.title}</h1>
+        )}
+    
+        <Content />
+    </div>
+</RootLayout>
+
+<style>
+
+.thumbnail-image {
+    width: 100%;
+}
+
+.container {
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgb(var(--text-primary), 0.9);
+}
+
+.container > :global(*) {
+    margin-block: 0.5rem;
+}
+
+.container :global(a) {
+    color: rgb(var(--accent-primary));
+}
+
+.container :global(h1, h2, h3, h4, h5, h6) {
+    margin-block: 30px !important;
+    margin-block-end: 10px !important;
+    color: rgb(var(--text-primary), 1);
+}
+
+h1.post-title {
+    font-size: 2.5rem;
+    color: rgb(var(--accent-primary));
+    margin-bottom: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.container :global(a:hover) {
+    opacity: 0.8;
+}
+
+.container :global(img) {
+    object-fit: scale-down;
+    max-width: 100%;
+}
+
+.container :global(.astro-code) {
+    background: rgb(var(--background-secondary)) !important;
+    padding: 15px 15px;
+}
+
+.container :global(table) {
+    border-spacing: 0;
+    border-collapse: collapse;
+    overflow-x: auto;
+    display: block;
+}
+
+.container :global(th, td) {
+    border-spacing: 0;
+    white-space: nowrap;
+    border-collapse: collapse;
+    border: 2px solid rgb(var(--background-secondary));
+}
+
+@media screen and (max-width: 700px) {
+    .thumbnail-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        object-fit: cover;
+        max-height: 30vh;
+    }
+
+    .container {
+        margin-top: 32vh;
+    }
+}
+
+</style>
