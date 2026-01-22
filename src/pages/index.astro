@@ -7,8 +7,8 @@ const posts = await getCollection("blog");
 
 <RootLayout title="Blogs">
     <section class="section-block">
-        <h1 class="large">My Blogs</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit adipisci eum quaerat beatae. </p>
+        <h1 id="title" class="large">qewer33's blog</h1>
+        <p id="desc">Welcome! Here are my latest projects, writings and ramblings.</p>
         <div class="container">
             {posts.map((post) => {
                 const date = post.data.created.toLocaleDateString("en-GB", { year: 'numeric', month: 'numeric', day: 'numeric' });
@@ -23,7 +23,7 @@ const posts = await getCollection("blog");
                         <div>
                             <div>
                                 <h3>{post.data.title}</h3>
-                                <p>{post.data.description}</p>    
+                                <p id="desc">{post.data.description}</p>    
                             </div>
                             <div class="tags">
                                 {post.data.tags.map((tag) => <span class="tag">{tag}</span>)}
@@ -41,10 +41,11 @@ const posts = await getCollection("blog");
 .container {
     display: grid;
     grid-template-columns: repeat(auto-fill, 300px);
-    grid-template-rows: repeat(auto-fill, 300px);
+    grid-template-rows: repeat(auto-fill, 325px);
     grid-column-gap: 15px;
     grid-row-gap: 15px;
     margin-block: 15px !important;
+    margin-top: 40px !important;
     justify-content: center;
 }
 
@@ -111,6 +112,7 @@ const posts = await getCollection("blog");
     font-size: 1.25rem;
     font-weight: 500;
     margin: 0;
+    margin-top: 6px;
     max-height: 52px;
 }
 
@@ -118,6 +120,7 @@ const posts = await getCollection("blog");
     font-size: 0.75rem;
     font-weight: 400;
     margin: 0;
+    margin-top: 6px;
     flex-grow: 1;
     max-height: 36px;
 }

@@ -1,10 +1,18 @@
 ---
+const isHome = Astro.url.pathname === "/";
 ---
 
 <header>
     <nav>
-        <a href="https://qewer.dev/">Portfolio</a>
-        <a href="/">Blogs</a>
+        <div class="nav-inner">
+            {!isHome && (
+                <a class="back" href="/">&lt; Back</a>
+            )}
+            <a class="brand" href="https://qewer.dev/">
+                <img src="/logo.png" alt="" aria-hidden="true" />
+                <span>qewer.dev</span>
+            </a>
+        </div>
     </nav>
 </header>
 
@@ -25,20 +33,64 @@ header nav {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 0px 25px;
+    padding: 0;
 }
 
-header a {
+.nav-inner {
+    width: 100%;
+    max-width: 930px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.back {
+    grid-column: 1;
+    justify-self: start;
+    text-decoration: none;
+    color: rgb(var(--text-secondary));
+    font-size: 1.25rem;
+}
+
+.back:hover {
+    color: rgb(var(--accent-primary));
+}
+
+.brand {
+    grid-column: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
     text-decoration: none;
     user-select: none;
-    color: rgb(var(--text-primary));
+    color: #3b82f6;
     font-weight: bold;
-    font-size: 0.8rem;
+    font-size: 1.5rem;
     padding: 10px 20px;
-    text-transform: uppercase;
+    text-transform: none;
+    justify-self: center;
 }
 
-header a:hover {
-    color: rgb(var(--accent-primary));
+.brand img {
+    width: 28px;
+    height: 28px;
+}
+
+.brand:hover {
+    color: #2563eb;
+}
+
+@media screen and (max-width: 950px) {
+    .nav-inner {
+        max-width: 760px;
+        padding: 0 20px;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .nav-inner {
+        max-width: 100%;
+    }
 }
 </style>

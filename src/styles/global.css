@@ -7,7 +7,7 @@
     --accent-primary: 5, 120, 240;
     --accent-secondary: 0, 96, 199;
     --text-primary: 255, 255, 255;
-    --text-secondary: 255, 255, 255;
+    --text-secondary: 200, 200, 200;
     --accent-pink: 197, 59, 112;
 
     font-synthesis: none;
@@ -48,7 +48,7 @@ h1.large {
 }
 
 section.section-block {
-    margin-top: 40vh;
+    margin-top: 30vh;
 }
 
 section.section-block > * {

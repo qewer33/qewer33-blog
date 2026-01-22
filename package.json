@@ -13,6 +13,7 @@
     "@astrojs/mdx": "^0.19.7",
     "@astrojs/rss": "^2.4.4",
     "astro": "^2.10.12",
-    "remark-gemoji": "^7.0.1"
+    "remark-gemoji": "^7.0.1",
+    "unist-util-visit-parents": "^5.1.3"
   }
 }
