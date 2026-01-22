@@ -37,6 +37,14 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await post.render();
 const url = Astro.url;
+const wordsPerMinute = 200;
+const wordCount = post.body ? post.body.trim().split(/\s+/).length : 0;
+const readingTimeMinutes = Math.max(1, Math.ceil(wordCount / wordsPerMinute));
+const publishedDate = post.data.created.toLocaleDateString("en-GB", {
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+});
 ---
 
 <RootLayout title={post.data.title} openGraph={{
@@ -53,6 +61,10 @@ const url = Astro.url;
         {post.data.title && (
             <h1 class="post-title">{post.data.title}</h1>
         )}
+        <div class="post-meta">
+            <span>{wordCount} words · {readingTimeMinutes} min read</span>
+            <span class="published-date">{publishedDate}</span>
+        </div>
     
         <Content />
     </div>
@@ -96,6 +108,15 @@ h1.post-title {
     margin-bottom: 1.5rem;
     font-weight: 700;
     text-decoration: none;
+}
+
+.post-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1rem;
+    color: rgb(var(--text-primary), 0.7);
+    margin-bottom: 1.5rem;
 }
 
 .container :global(a:hover) {
