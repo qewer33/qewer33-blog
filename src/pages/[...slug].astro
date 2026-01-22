@@ -48,6 +48,7 @@ const publishedDate = post.data.created.toLocaleDateString("en-GB", {
     month: "short",
     day: "2-digit",
 });
+const viewSlug = post.slug;
 ---
 
 <RootLayout title={post.data.title} openGraph={{
@@ -66,12 +67,39 @@ const publishedDate = post.data.created.toLocaleDateString("en-GB", {
         )}
         <div class="post-meta">
             <span>{wordCount} words · {readingTimeMinutes} min read</span>
-            <span class="published-date">{publishedDate}</span>
+            <span class="post-meta-right">
+                <span class="published-date">{publishedDate}</span>
+                <span> · </span>
+                <span class="view-count" data-view-count data-slug={viewSlug}>? views</span>
+            </span>
         </div>
     
         <Content />
     </div>
 </RootLayout>
+
+<script type="module">
+const viewCountEl = document.querySelector("[data-view-count]");
+if (viewCountEl) {
+    const slug = viewCountEl.getAttribute("data-slug");
+    const cache = window.__viewCountCache || (window.__viewCountCache = new Map());
+
+    if (slug && cache.has(slug)) {
+        viewCountEl.textContent = `${cache.get(slug)} views`;
+    } else if (slug) {
+        fetch(`https://blog-api.qewer.dev/api/views?slug=${encodeURIComponent(slug)}`)
+            .then((response) => response.ok ? response.json() : Promise.reject())
+            .then((data) => {
+                const formattedViews = new Intl.NumberFormat().format(data?.views ?? 0);
+                cache.set(slug, formattedViews);
+                viewCountEl.textContent = `${formattedViews} views`;
+            })
+            .catch(() => {
+                viewCountEl.textContent = "? views";
+            });
+    }
+}
+</script>
 
 <style>
 
@@ -121,6 +149,12 @@ h1.post-title {
     font-size: 1rem;
     color: rgb(var(--text-primary), 0.7);
     margin-bottom: 1.5rem;
+}
+
+.post-meta-right {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
 }
 
 .container :global(a:hover) {
