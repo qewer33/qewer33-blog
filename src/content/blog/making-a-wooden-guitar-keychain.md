@@ -20,7 +20,7 @@ And after that, the sheet is sent to the printer. Here are the templates with th
 
 ![Printed templates and the walnut & cherry wood stock](/images/blog/making-a-wooden-guitar-keychain/printed_a4_on_woodstock.jpeg)
 
-Then I use a carbon paper to transfer the templates onto the stock. Surprisingly, black carbon paper even has decent contrast with the dark walnut.
+Then I used a carbon paper to transfer the templates onto the stock. Surprisingly, black carbon paper even has decent contrast with the dark walnut.
 
 ![The templates transferred onto the stock with carbon paper](/images/blog/making-a-wooden-guitar-keychain/carbon_paper_transfer.jpeg)
 

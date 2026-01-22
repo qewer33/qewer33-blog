@@ -94,6 +94,7 @@ const publishedDate = post.data.created.toLocaleDateString("en-GB", {
 
 .container :global(p) {
     margin: 25px 0;
+    text-align: justify;
 }
 
 .container :global(h1, h2, h3, h4, h5, h6) {
@@ -177,6 +178,17 @@ h1.post-title {
 
     .container {
         margin-top: 32vh;
+    }
+
+    h1.post-title {
+        font-size: 2rem;
+        line-height: 1.15;
+    }
+
+    .container :global(figure.image-caption) {
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
     }
 }
 
