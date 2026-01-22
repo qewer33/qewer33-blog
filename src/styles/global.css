@@ -56,6 +56,12 @@ section.section-block > * {
     margin-block-end: 0.25em;
 }
 
+@media screen and (max-width: 600px) {
+    section.section-block {
+        margin-top: 18vh;
+    }
+}
+
 .skew {
     transform: skew(-5deg);
 }

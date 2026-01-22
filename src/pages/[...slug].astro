@@ -37,6 +37,9 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await post.render();
 const url = Astro.url;
+const imageUrl = post.data.thumbnail
+    ? new URL(post.data.thumbnail, Astro.site).toString()
+    : undefined;
 const wordsPerMinute = 200;
 const wordCount = post.body ? post.body.trim().split(/\s+/).length : 0;
 const readingTimeMinutes = Math.max(1, Math.ceil(wordCount / wordsPerMinute));
@@ -50,7 +53,7 @@ const publishedDate = post.data.created.toLocaleDateString("en-GB", {
 <RootLayout title={post.data.title} openGraph={{
     title: post.data.title,
     description: post.data.description,
-    image: post.data.thumbnail,
+    image: imageUrl,
     url: url.toString(),
 }}>
     {post.data.thumbnail && (
