@@ -12,37 +12,38 @@ interface Props {
 }
 
 let { title, openGraph } = Astro.props;
+const siteName = "qewer33's blog";
+const description = openGraph?.description || "Personal blog of qewer33.";
+const canonicalUrl = openGraph?.url || "https://blog.qewer.dev";
 ---
 
 <title>{title}</title>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 {/* Generic Meta tags */}
-<meta name="description" content="Description of my website">
+<meta name="description" content={description}>
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="URL for this page">
+<link rel="canonical" href={canonicalUrl}>
 
 {/* Social Media meta tags */}
 {openGraph && <>
     {openGraph.title && <meta property="og:title" content={openGraph.title}>}
-    {openGraph.description && <meta property="og:description" content={openGraph.description}>}
+    <meta property="og:description" content={description}>
     {openGraph?.image && <meta property="og:image" content={openGraph.image}>}
-    {openGraph.url && <meta property="og:url" content={openGraph.url}>}
-    {openGraph.title && <meta property="og:site_name" content={openGraph.title}>}
+    <meta property="og:url" content={canonicalUrl}>
+    <meta property="og:site_name" content={siteName}>
 </>}
 
 {/* Twitter meta tags */}
 <meta name="twitter:card" content="summary_large_image"> {/* Don't change this one */}
-<meta name="twitter:site" content="Website URL">
-<meta name="twitter:title" content="Title for page">
-<meta name="twitter:creator" content="Your Twitter Handle">
-<meta name="twitter:description" content="Description of page">
-<meta name="twitter:image" content="Image of page">
+<meta name="twitter:site" content="https://blog.qewer.dev">
+<meta name="twitter:title" content={title}>
+<meta name="twitter:description" content={description}>
+{openGraph?.image && <meta name="twitter:image" content={openGraph.image}>}
 
 {/* Apple meta tags */}
 <meta name="format-detection" content="telephone=yes"> {/* auto detect phone numbers on apple devices on this page */}
-<meta name="viewport" content="initial-scale=1, maximum-scale=1" user-scalable="no"> {/* For mobile devices */}
 
 {/* Dark Reader extension */}
 <meta name="darkreader-lock"> {/* Prevents dark reader from modifying your website colors, uncomment */}
