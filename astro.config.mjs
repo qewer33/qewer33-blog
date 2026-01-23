@@ -4,7 +4,7 @@ import remarkGemoji from 'remark-gemoji';
 import rehypeFigureCaptions from './src/utils/rehype-figure-captions.js';
 
 export default defineConfig({
-	site: 'https://qewer.dev/',
+	site: 'https://blog.qewer.dev/',
 	integrations: [
         mdx(),
     ],

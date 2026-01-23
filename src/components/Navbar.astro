@@ -9,9 +9,10 @@ const isHome = Astro.url.pathname === "/";
                 <a class="back" href="/">&lt; Back</a>
             )}
             <a class="brand" href="https://qewer.dev/">
-                <img src="/logo.png" alt="" aria-hidden="true" />
+                <img src="/logo_nobg.png" alt="" aria-hidden="true" />
                 <span>qewer.dev</span>
             </a>
+            <a class="rss" href="/rss.xml">RSS</a>
         </div>
     </nav>
 </header>
@@ -79,6 +80,19 @@ header nav {
 
 .brand:hover {
     color: #2563eb;
+}
+
+.rss {
+    grid-column: 3;
+    justify-self: end;
+    text-decoration: none;
+    color: rgb(var(--text-secondary));
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+}
+
+.rss:hover {
+    color: rgb(var(--accent-primary));
 }
 
 @media screen and (max-width: 950px) {
