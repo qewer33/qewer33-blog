@@ -9,6 +9,7 @@ interface Props {
             description: string;
             tags: string[];
             created: Date;
+            updated?: Date;
             thumbnail: string;
         }
         render: () => any;
@@ -56,6 +57,9 @@ const viewSlug = post.slug;
     description: post.data.description,
     image: imageUrl,
     url: url.toString(),
+}} article={{
+    publishedTime: post.data.created.toISOString(),
+    modifiedTime: post.data.updated?.toISOString(),
 }}>
     {post.data.thumbnail && (
         <img src={post.data.thumbnail} alt="" class="thumbnail-image" />
@@ -192,15 +196,26 @@ h1.post-title {
 .container :global(table) {
     border-spacing: 0;
     border-collapse: collapse;
-    overflow-x: auto;
-    display: block;
+    display: table;
+    width: max-content;
+    max-width: 100%;
+    table-layout: auto;
 }
 
 .container :global(th, td) {
     border-spacing: 0;
-    white-space: nowrap;
     border-collapse: collapse;
     border: 2px solid rgb(var(--background-secondary));
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: normal;
+    min-width: 180px;
+    padding: 3px 7px !important;
+}
+
+.container :global(th) {
+    text-align: left;
+    background: rgb(var(--background-secondary));
 }
 
 @media screen and (max-width: 700px) {

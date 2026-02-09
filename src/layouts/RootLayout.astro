@@ -10,10 +10,14 @@ interface Props {
         description?: string,
         image?: string,
         url?: string,
-    }
+    },
+    article?: {
+        publishedTime?: string,
+        modifiedTime?: string,
+    },
 }
 
-let { title, openGraph } = Astro.props;
+let { title, openGraph, article } = Astro.props;
 
 title = title || "qewer33's blog";
 openGraph = openGraph || {
@@ -26,7 +30,7 @@ openGraph = openGraph || {
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<Meta title={title} openGraph={openGraph} />
+		<Meta title={title} openGraph={openGraph} article={article} />
 	</head>
 	<body>
         <Navbar />
