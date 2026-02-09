@@ -38,6 +38,8 @@ const canonicalUrl = openGraph?.url || "https://blog.qewer.dev";
     <meta property="og:type" content={article?.publishedTime ? "article" : "website"}>
     <meta property="og:description" content={description}>
     {openGraph?.image && <meta property="og:image" content={openGraph.image}>}
+    {openGraph?.image && <meta property="og:image:secure_url" content={openGraph.image}>}
+    {openGraph?.image && <meta property="og:image:alt" content={openGraph.title || title}>}
     <meta property="og:url" content={canonicalUrl}>
     <meta property="og:site_name" content={siteName}>
 </>}
@@ -55,6 +57,7 @@ const canonicalUrl = openGraph?.url || "https://blog.qewer.dev";
 <meta name="twitter:title" content={title}>
 <meta name="twitter:description" content={description}>
 {openGraph?.image && <meta name="twitter:image" content={openGraph.image}>}
+{openGraph?.image && <meta name="twitter:image:alt" content={openGraph.title || title}>}
 
 {/* Apple meta tags */}
 <meta name="format-detection" content="telephone=yes"> {/* auto detect phone numbers on apple devices on this page */}
