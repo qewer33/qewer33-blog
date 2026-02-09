@@ -67,6 +67,8 @@ Throughout the 4 day course, we did a couple of **Capture the Signal** exercises
 
 Our instructor also had us solve the same CTSs using both a general purpose SDR software (SDR++ or Gqrx) and using GNU Radio. We had to create our own simple flowgraphs in GNU Radio to listen to the signals, it was also fun doing it in two different ways.
 
+![The same cat barely visible in GNU Radio (the sampling rate here was a bit too high 😅)](/images/blog/four-days-of-software-defined-radio/flag_cat_gnuradio.png)
+
 ## ADS-B & Digital Communication
 
 On the last day of the course, we got a brief look into digital radio communication. Our instructor was pretty clear on how modern digital communication systems were extremely complex (think of *WiFi, Bluetooth and 5G*) and it probably wouldn't even fit into a whole semester lecture but he wanted us to briefly discover them as they're incredibly important for modern systems. We learned about some of the differences between analog modulations and digital modulations. We also learned about **ADS-B**, the digital radio broadcast system used by planes to transmit information about their flight status. We then used the [SDRAngel](https://www.sdrangel.org/) software to view the ADS-B data broadcast from planes flying overhead us via our RTL-SDRs. It was super cool to see the data they were broadcasting and see them on the map!
